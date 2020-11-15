@@ -1,0 +1,75 @@
+# yum install -y epel-release
+# yum makecache
+# yum install -y nginx
+# systemctl start nginx.service
+# systemctl enable nginx.service
+# firewall-cmd --permanent --add-service=http
+# firewall-cmd --reload
+
+
+
+# vim /etc/hosts
+192.168.5.157 ha.example.com ha
+192.168.5.158 ws1.example.com ws1
+192.168.5.159 ws2.example.com ws2
+
+
+
+
+# vim /etc/nginx/nginx.conf
+coment the following
+
+
+
+#    server {
+#        listen       80 default_server 
+#        listen       [::]:80 default_server 
+#        server_name  _ 
+#        root         /usr/share/nginx/html 
+
+        # Load configuration files for the default server block.
+#        include /etc/nginx/default.d/*.conf 
+
+#        location / {
+#        }
+
+#        error_page 404 /404.html 
+#            location = /40x.html {
+#        }
+
+#        error_page 500 502 503 504 /50x.html 
+#            location = /50x.html {
+#        }
+#    }
+
+
+
+And add the following
+---------------------
+
+
+
+upstream backend {
+        server 192.168.152.131;
+        server 192.168.1.11;
+
+ }
+
+
+server {
+listen 80;
+location / {
+proxy_pass http://backend;
+}
+}
+
+
+# nginx -t
+# systemctl restart nginx.service
+
+
+------------------------------------------------------------
+pame stous alous tous servers kai andikathistoume to index.html kai tous grafoume to 
+server1 kai server2
+gia na katalavoume oti kanei to round robin sosta.
+pame ston server tou load Balancer kai patame refresh gia na doume oti ginete sosta h enalagh
