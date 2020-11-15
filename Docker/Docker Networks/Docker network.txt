@@ -1,0 +1,30 @@
+
+# mkdir /db
+# vim /Dockerfile
+
+From ubuntu
+
+RUN apt-egt update && apt-get install -y --no-install-recomends iputils-ping
+
+EXPOSE 3306
+
+CMD ["tail","-f","/dev/null"]
+
+
+# docker networks create social_network
+
+# docker build -t social_server ./server
+
+# mkdir /server
+# vim Dockerfile
+
+From ubuntu
+CMD ["tail","-f","/dev/null"]
+
+# docker build -t social_db ./db
+# docker run -d --name sicial_server_container --network social_network --publish 80:80 --publish 443:443 social_server
+# docker run -d --name social_db_container --network social_network social_db
+
+docker exec -it social_server_container /bin/bash
+
+VLEPOUME OTI AN KANOUME PING APO TO SERVER_CONTAINER STO DB_CONTAINER TO VLEPEI GIATI EINAI STO IDIO DIKTIO
